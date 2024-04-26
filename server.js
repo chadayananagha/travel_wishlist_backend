@@ -69,6 +69,21 @@ app.get("/countries/:id", (req, res) => {
   }
 });
 
+app.post("/countries", (req, res) => {
+  const { name, alpha2Code, alpha3Code } = req.body;
+
+  const id = countries.length + 1;
+
+  const newCountry = {
+    id: id,
+    name,
+    alpha2Code,
+    alpha3Code,
+  };
+  countries.push(newCountry);
+  res.status(201).json({ message: "Country added successfully.", countries });
+});
+
 app.listen(PORT, () => {
   console.log(`running on http://localhost:${PORT}`);
 });
